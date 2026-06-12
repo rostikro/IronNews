@@ -12,7 +12,7 @@ async fn health_check() {
     let client = reqwest::Client::new();
 
     let response = client
-        .get(&format!("http://{}/health_check", addr))
+        .get(format!("http://{addr}/health_check"))
         .send()
         .await
         .unwrap();
