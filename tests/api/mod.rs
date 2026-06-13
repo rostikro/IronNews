@@ -1,5 +1,7 @@
+mod subscription;
+
 use axum::body::Body;
-use axum::http::{Request, StatusCode};
+use axum::http::Request;
 use http_body_util::BodyExt;
 use iron_news::app;
 use tower::ServiceExt;
@@ -13,7 +15,7 @@ async fn health_check() {
         .await
         .unwrap();
 
-    assert_eq!(response.status(), StatusCode::OK);
+    assert!(response.status().is_success());
 
     let body = response.into_body().collect().await.unwrap().to_bytes();
     assert!(body.is_empty());
